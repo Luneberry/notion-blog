@@ -8,6 +8,8 @@ export const metadata = {
   description: "Notion을 CMS로 사용하는 블로그의 게시글 목록입니다.",
 }
 
+// src/app/page.tsx
+export const dynamic = 'force-dynamic'; // 항상 서버에서 실행
 export const revalidate = 60
 
 export default async function HomePage() {
