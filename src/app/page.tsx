@@ -13,7 +13,13 @@ export const dynamic = 'force-dynamic'; // 항상 서버에서 실행
 export const revalidate = 60
 
 export default async function HomePage() {
-  const posts = await getPublishedPosts()
+  let posts = [];
+  try {
+    posts = await getPublishedPosts();
+  } catch (e) {
+    console.error('[getPublishedPosts] failed:', e);
+    posts = []; // 실패해도 페이지는 렌더
+  }
 
   return (
     <div className="min-h-screen">
