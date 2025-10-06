@@ -57,6 +57,16 @@ async function queryNotionDatabase(filter?: any, sorts?: any) {
  */
 export async function getPublishedPosts(): Promise<BlogPost[]> {
   try {
+    // --- DEBUGGING LOGS START ---
+    console.log("Attempting to fetch published posts...");
+    console.log(`Database ID used: ${process.env.NOTION_DATABASE_ID}`);
+    if (process.env.NOTION_API_KEY) {
+      const key = process.env.NOTION_API_KEY;
+      console.log(`API Key used (partial): ${key.substring(0, 5)}...${key.substring(key.length - 4)}`);
+    } else {
+      console.log("API Key is NOT DEFINED in this environment.");
+    }
+    // --- DEBUGGING LOGS END ---
     const response = await queryNotionDatabase(
       {
         property: "Published",
