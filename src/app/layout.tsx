@@ -16,9 +16,21 @@ const poppins = Poppins({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "Notion Blog",
-  description: "Notion을 CMS로 사용하는 블로그입니다.",
+export const metadata = {
+  title: "Notion Blog | 강력한 블로그 플랫폼",
+  description: "Notion을 CMS로 사용하는 SEO 친화적 블로그",
+  keywords: ["Notion", "Blog", "Next.js", "SEO", "카카오애드핏"],
+  openGraph: {
+    title: "Notion Blog",
+    description: "Notion을 CMS로 사용하는 SEO 친화적 블로그입니다.",
+    url: "https://notion-blog-yourname.vercel.app",
+    siteName: "Notion Blog",
+    locale: "ko_KR",
+    type: "website",
+  },
+  alternates: {
+    canonical: "https://notion-blog-syga.vercel.app/",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
