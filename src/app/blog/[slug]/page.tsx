@@ -35,25 +35,21 @@ export async function generateStaticParams() {
 export const revalidate = 60
 
 export default async function BlogPostPage({ params }: Props) {
-  // --- RUNTIME DEBUGGING LOGS ---
-  console.log(`[RUNTIME] Rendering page for slug: ${await params.slug}`);
-  console.log(`[RUNTIME] DB_ID available: ${!!process.env.NOTION_DATABASE_ID}`);
-  if (process.env.NOTION_API_KEY) {
-    const key = process.env.NOTION_API_KEY;
-    console.log(`[RUNTIME] API_KEY available (partial): ${key.substring(0, 5)}...${key.substring(key.length - 4)}`);
-  } else {
-    console.log("[RUNTIME] API_KEY IS NOT AVAILABLE.");
-  }
-  // --- END RUNTIME DEBUGGING LOGS ---
+  const { slug } = await params;
+  const post = await getPostBySlug(slug);
 
-  const { slug } = await params
-  const post = await getPostBySlug(slug)
-
+  // --- FINAL DEBUGGING LOGS ---
+  console.log(`[FINAL_DEBUG] Slug: ${slug}`);
+  console.log(`[FINAL_DEBUG] Result of getPostBySlug: ${post ? `Post found with ID ${post.id}` : 'Post NOT FOUND (null)'}`);
+  
   if (!post) {
-    notFound()
+    notFound();
   }
 
-  const content = await getPostContent(post.id)
+  const content = await getPostContent(post.id);
+  console.log(`[FINAL_DEBUG] Result of getPostContent: Content length is ${content.length}`);
+  // --- END FINAL DEBUGGING LOGS ---
+
   const readingTime = Math.ceil(content.split(" ").length / 200)
 
   return (
