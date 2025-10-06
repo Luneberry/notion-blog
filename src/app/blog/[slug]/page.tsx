@@ -35,6 +35,17 @@ export async function generateStaticParams() {
 export const revalidate = 60
 
 export default async function BlogPostPage({ params }: Props) {
+  // --- RUNTIME DEBUGGING LOGS ---
+  console.log(`[RUNTIME] Rendering page for slug: ${await params.slug}`);
+  console.log(`[RUNTIME] DB_ID available: ${!!process.env.NOTION_DATABASE_ID}`);
+  if (process.env.NOTION_API_KEY) {
+    const key = process.env.NOTION_API_KEY;
+    console.log(`[RUNTIME] API_KEY available (partial): ${key.substring(0, 5)}...${key.substring(key.length - 4)}`);
+  } else {
+    console.log("[RUNTIME] API_KEY IS NOT AVAILABLE.");
+  }
+  // --- END RUNTIME DEBUGGING LOGS ---
+
   const { slug } = await params
   const post = await getPostBySlug(slug)
 
