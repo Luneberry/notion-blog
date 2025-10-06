@@ -33,7 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <ins
             className="kakao_ad_area"
             style={{ display: "none", width: "100%" }}
-            data-ad-unit="여기에_AdFit에서_발급받은_광고단위ID"
+            data-ad-unit="DAN-EI02oUNmqHBR7hwg"
             data-ad-width="320"
             data-ad-height="100"
           ></ins>
